@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Warehouse Self-Service Portal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" href="../css/fonts/fonts.css">
+    <link rel="stylesheet" href="../css/bootstrap.css" media="screen">
+    <link rel="stylesheet" href="../css/gijgo.min.css">
+    <link rel="stylesheet" href="../css/fontawesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+	<style>
+	/* Add a black background color to the top navigation */
+.topnav {
+    background-color: #333;
+    overflow: hidden;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Add a color to the active/current link */
+.topnav a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+/* Right-aligned section inside the top navigation */
+.topnav-right {
+  float: right;
+}
+nav{width:350px;height:350px; margin: 100px auto; position: relative; transform:rotate(45deg);border:none;}
+nav > ul {padding:0; list-style:none}	
+nav > ul > li {position: absolute; width: 80px; height: 80px; background-color:#FF9933; border-radius:50%;
+				moz-transform:rotate(-45deg);
+				webkit-transform:rotate(-45deg);
+				o-transform:rotate(-90deg);
+				transform:rotate(-90deg);
+}
+
+nav > ul > li > div > a{
+	display:block; width:80px; height:80px; color:#000; text-align: center;
+	font-size: 30px; line-height:3.0;
+	moz-transform:rotate(45deg);
+	webkit-transform:rotate(45deg);
+	o-transform:rotate(45deg);
+	transform:rotate(45deg);
+}
+nav > ul > li:nth-child(1) {left:0; top:0}
+nav > ul > li:nth-child(2){right:0; top:0}
+nav > ul > li:nth-child(3){left:0; bottom:0}
+nav > ul > li:nth-child(4){right:0; bottom:0}
+nav > ul > li:nth-child(5){left:115px; top:115px; height:110px; width:110px; background-color:#000;}
+nav > ul > li:nth-child(6){left:0; top:130px}
+nav > ul > li:nth-child(7){left:130px; top:0}
+
+.fa-window-close{
+	width:100px;height:115px;line-height:2.1; 
+	font-size:50px; color:#FF9933; display:block;
+	border-radius:50%; padding-left: 28px;
+	
+	moz-transform:rotate(45deg);
+	webkit-transform:rotate(45deg);
+	o-transform:rotate(45deg);
+	transform:rotate(45deg);
+	
+	} 
+.fa-plus{
+	position: relative; text-decoration: none;
+	left:10px; top:0px; border:none;
+	width:90px;height:90px;line-height:2.4; padding-left: 27px;
+	font-size:40px; color:#FF9933; 
+	border-radius:50%; background-color:#000;
+	}	
+	
+.dropbtn {
+   
+    /*padding: 16px*/;
+    font-size: 30px;
+    border: none;
+}
+
+/* The container <div> - needed to position the dropdown content  background-color: #4CAF50;
+    color: white;*/
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+	position: absolute;
+	background-color: #f1f1f1;
+	min-width: 250px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 2;
+	left: 0;
+    top: 0;
+    width: 100%;
+	-moz-transform:rotate(45deg);
+	-webkit-transform:rotate(45deg);
+	-o-transform:rotate(45deg);
+	-transform:rotate(45deg);
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #ddd;}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {display: block;}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {background-color: #3e8e41;}	
+	</style>
+</head>
+<body>
+    <div class="bg-dark container-fluid row">
+		<div class="col-12">
+			 <div class="topnav">
+				 <a href="#">
+					<i class="fas fa-sign-in-alt"></i>
+					<span class="link">Login</span>
+				</a>
+				<div class="topnav-right">
+					<a class="nav-link" href="#" id="navbarMenuLogout">
+						<i class="fas fa-sign-out-alt"></i>
+						<span class="link">Logout</span>
+					</a>
+				</div>
+			</div> 
+		</div>
+	</div>
+    <div class="navbar navbar-expand-lg navbar-dark bg-primary">
+		
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <a href="/" class="navbar-brand">
+                        <img src="../img/logo.jpg"></a>
+                 <span class="navbar-text"><i class="far fa-user"></i> Lynton Hegele</span>
+                </div>
+			</div>		
+			<div class="collapse navbar-collapse" id="navbarSearch">
+				<form class="form-inline ml-auto">
+					<div class="md-form my-0 input-group d-none dfrom" id="dfParent">
+						<input class="form-control mr-sm-5 datepicker" type="text" placeholder="Date from" aria-label="Search" id="searchDateFrom">
+					</div>
+					<div class="md-form my-0 input-group d-none dto" id="dtParent">
+						<input class="form-control mr-sm-5 datepicker" type="text" placeholder="Date To" aria-label="Search" id="searchDateTo">
+					</div>
+					
+					<div class="md-form my-0 search input-group qt d-none">
+						
+						<div class="input-group-append">
+						<input class="form-control form-control py-2 border-right-0 border" type="search" placeholder="Search" aria-label="Search" id="searchInput">
+						<span class="input-group-append">
+							<button class="btn btn-outline-secondary border-left-0" type="button" id="btnType" onclick="matchInput($('#searchInput').val())">
+								<i class="fa fa-search"></i>
+							</button>
+						</span>
+							<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="link">Query Type</span></button>
+							<div class="dropdown-menu lynt">
+							  <a class="dropdown-item" href="#"><span class="link">Order Status</span></a>
+							  <a class="dropdown-item" href="#"><span class="link">Priority</span></a>
+							  <a class="dropdown-item" href="#"><span class="link">Returns</span></a>
+							  <div role="separator" class="dropdown-divider"></div>
+							  <a class="dropdown-item" href="#"><span class="link">Collections</span></a>
+							  <a class="dropdown-item" href="#"><span class="link">Repairs/Assesments</span></a>
+							  <a class="dropdown-item" href="#"><span class="link">Other</span></a>
+							</div>
+						</div>
+					</div>
+					<div class="md-form my-0 input-group d-none qf">
+						<input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" id="searchQueryFilter">
+						<span class="input-group-append">
+							<button class="btn btn-outline-secondary border-left-0" type="button" id="btnFilter" onclick="matchInput($('#searchQueryFilter').val())">
+								<i class="fa fa-search"></i>
+							</button>
+						</span>
+						<div class="input-group-append">
+							<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="link">Query Filter</span></button>
+							<div class="dropdown-menu lyntQfilt">
+							  <a class="dropdown-item" href="#"><span class="link">Query Status</span></a>
+							  <a class="dropdown-item" href="#"><span class="link">Query Number</span></a>
+							  <a class="dropdown-item" href="#"><span class="link">Date Range</span></a>
+							  <div role="separator" class="dropdown-divider"></div>
+							  <a class="dropdown-item" href="#"><span class="link">Created By</span></a>
+							  <a class="dropdown-item" href="#"><span class="link">Latest Fifty</span></a>
+							  <a class="dropdown-item" href="#"><span class="link">Assignee</span></a>
+							</div>
+						</div>
+					</div>
+					<div class="md-form my-0 input-group d-none qp">
+						<input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" id="searchPriorityFilter">
+						<span class="input-group-append">
+							<button class="btn btn-outline-secondary border-left-0" type="button" id="btn-Priority" onclick="matchInput($('#searchPriorityFilter').val(), this.id)">
+								<i class="fa fa-search"></i>
+							</button>
+						</span>
+						<div class="input-group-append">
+							<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="link">Priority</span></button>
+							<div class="dropdown-menu lyntQpriority">
+							  <a class="dropdown-item" href="#"><span class="link">High</span></a>
+							  <a class="dropdown-item" href="#"><span class="link">Standard</span></a>
+							  <a class="dropdown-item" href="#"><span class="link">Low</span></a>
+							  <div role="separator" class="dropdown-divider"></div>
+							 </div>
+						</div>
+					</div>
+					<div class="md-form my-0 input-group d-none qs"> 
+						<input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" id="searchQueryStatus">
+						<span class="input-group-append">
+							<button class="btn btn-outline-secondary border-left-0" type="button" id="btn-status" onclick="matchInput($('#searchQueryStatus').val(),this.id)">
+								<i class="fa fa-search"></i>
+							</button>
+						</span>
+						<div class="input-group-append">
+							<button class="btn btn-outline-secondary dropdown-toggle bt-stat" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="link">Query Status</button>
+							<div class="dropdown-menu lyntQstat">
+							  <a class="dropdown-item" href="#"><span class="link">Created</span></a>
+							  <a class="dropdown-item" href="#"><span class="link">In Progress</span></a>
+							  <a class="dropdown-item" href="#"><span class="link">On Hold - awaiting Info</span></a>
+							  <div role="separator" class="dropdown-divider"></div>
+							  <a class="dropdown-item" href="#"><span class="link">Breached SLA</span></a>
+							  <a class="dropdown-item" href="#"><span class="link">Completed</span></a>
+							  <a class="dropdown-item" href="#"><span class="link">Closed</span></a>
+							</div>
+						</div>
+					</div>
+					<div class="md-form my-0 d-none input-group qa">
+						<input class="form-control form-control py-2 border-right-0 border" type="search" placeholder="Search" aria-label="Search" id="searchAssignee">
+						<span class="input-group-append">
+							<button class="btn btn-outline-secondary border-left-0" type="button" id="btn-assign" onclick="matchInput($('#searchAssignee').val(), this.id)">
+								<i class="fa fa-search"></i>
+							</button>
+						</span>
+						<div class="input-group-append">
+							<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="link">Assignee</button>
+							<div class="dropdown-menu lyntAssignee">
+							  <a class="dropdown-item" href="#"><span class="link">Joe Formbe</span></a>
+							  <a class="dropdown-item" href="#"><span class="link">Kevin Spacey</span></a>
+							  <a class="dropdown-item" href="#"><span class="link">Bat el Man</span></a>
+							  <div role="separator" class="dropdown-divider"></div>
+							  <a class="dropdown-item" href="#"><span class="link">Jimmy Hoffa</span></a>
+							  <a class="dropdown-item" href="#"><span class="link">Ricard Dun</span></a>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+    </div>
+	
+    <!-- MAIN Content wher form will be -->
+
+    <main class="container-fluid" >
+        <div class="row">
+			<h3 class="mx-auto" id="pageName">Warehouse Self-Service Portal</h3>
+		 </div>
+		 <nav id="radmenu" class="d-none">
+			<ul>
+				<li>
+				<div class="dropdown">
+					<a href='#'><span><i class="fas fa-list-alt dropbtn"></i></span></a>
+					<div class="dropdown-content" >
+						<a href="#"><span class="link">Log Query</span></a>
+						<a href="#"><span class="link">Update Status</span></a>
+						<a href="#"><span class="link">Close Query</span></a>
+						<a href="#"><span class="link">Re-open Query</span></a>
+						<a href="#" onclick="showSearch()"><span class="link">View Queries</span></a>
+					</div>
+				</div>
+				</li>
+				
+				<li>				
+				<div class="dropdown">
+					<a href='#'><span><i class="fas fa-mobile dropbtn"></i></span></a>
+					<div class="dropdown-content">
+						<a href="#"><span class="link">Returns</span></a>
+						<a href="#"><span class="link">Collections</span></a>
+						<a href="#"><span class="link">RMA Status</span></a>
+					</div>
+				</div>
+				</li>
+				<li>
+					<div class="dropdown">
+						<a href='#'><span><i class="fab fa-android dropbtn"></i></span></a>
+						<div class="dropdown-content">
+							<a href="#"><span class="link">User</span></a>
+							<a href="#"><span class="link">Assign Query</span></a>
+							<a href="#"><span class="link">Escalations</span></a>
+							<a href="#"><span class="link">Pause Order</span></a>
+							<a href="#"><span class="link">Capture alt Contact Details</span></a>
+							<a href="#"><span class="link">Ack alt Contact Details</span></a>
+						</div>	
+					</div>
+				</li>
+				<li>
+					<div class="dropdown">
+						<a href='#'><span><i class="fas fa-ticket-alt"></i></span></a>
+						<div class="dropdown-content">
+							<a href="#"><span class="link">View Orders</span></a>
+							<a href="#"><span class="link">Reports</span></a>
+						</div>
+					</div>
+				</li>
+				<li><a href='#' onclick="showMenu(id)" id="menu" data-toggle="tooltip" title="Close Menu"><span><i class="fas fa-window-close"></i></span></a></li>
+				<li>
+					<div class="dropdown">
+						<a href='#'><span><i class="fas fa-home"></i></span></a>
+						<div class="dropdown-content">
+							<a href="#"><span class="link">View Notifications</span></a>
+						</div>
+					</div>
+				</li> 
+				<li>
+				<div class="dropdown">
+						<a href='#'><span><i class="fas fa-book"></i></span></a>
+						<div class="dropdown-content">
+							<a href="#"><span class="link">POD</span></a>
+							<a href="#"><span class="link">Tax Invoice</span></a>
+						</div>
+					</div>
+				</li>				
+			</ul>
+			
+		 </nav>
+		 
+		 <a href='#' onclick="showMenu(id)" id="menuToggle" data-toggle="tooltip" title="View Menu"><span><i class="fas fa-plus"></i></span></a>
+		 
+		 <div class="col-10">
+			<div class="tab-content d-none" id="v-pills-tabContent">
+			  <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+				<div id="homeTab" class="card px-5 py-5">
+					  
+					
+				</div>
+			  </div>
+			  <div class="tab-pane fade d-none" id="v-pills-Orders" role="tabpanel" aria-labelledby="v-pills-Orders-tab">
+						<div class="card px-5 py-5">
+							<div>
+							</div>
+							<div class="my-2 mx-2">
+								<table class="table table-bordered table-responsive-md table-striped text-center">
+							<tr>
+								<th class="text-center">SKU</th>
+								<th class="text-center">TRED</th>
+								<th class="text-center">Description</th>
+								<th class="text-center">Quantity</th>
+								<th class="text-center">Amount</th>
+								<th class="text-center">Channel</th>
+								<th class="text-center">Status</th>
+								<th class="text-center">Date Created</th>
+								<th class="text-center"></th>
+							</tr>
+							<tr>
+								<td class="pt-3-half" contenteditable="false">12345</td>
+								<td class="pt-3-half" contenteditable="true">8989M</td>
+								<td class="pt-3-half" contenteditable="true">a Fone of note</td>
+								<td class="pt-3-half" contenteditable="true">2</td>
+								<td class="pt-3-half" contenteditable="true">R 24220.00</td>
+								<td class="pt-3-half" contenteditable="true">Boyz Store</td>
+								<td class="pt-3-half" contenteditable="true">In Progress</td>
+								<td class="pt-3-half" contenteditable="true">22/07/2018</td>
+								<!--
+								<td class="pt-3-half">
+									<span class="table-up"><a href="#!" class="indigo-text"><i class="fa fa-long-arrow-up" aria-hidden="true"></i></a></span>
+									<span class="table-down"><a href="#!" class="indigo-text"><i class="fa fa-long-arrow-down" aria-hidden="true"></i></a></span>
+								</td>-->
+								<td class="pt-3-half">
+									<div class="btn-group">
+										<p data-placement="top" data-toggle="tooltip" title="Edit">
+											<button class="btn-xs" data-title="Edit" data-toggle="modal" id="btn-edit" data-target="#myModal" >
+												<i class="fas fa-pencil-alt"></i>
+											</button>
+										</p>
+										<p data-placement="top" data-toggle="tooltip" title="Close">
+											<button class="btn-danger btn-xs" data-title="Close" data-toggle="modal" data-target="#close" >
+												<i class="fa fa-archive"></i>
+											</button>
+										</p>
+									</div>
+								</td>	
+							</tr>
+						   
+							<tr>
+								<td class="pt-3-half" contenteditable="false">12345</td>
+								<td class="pt-3-half" contenteditable="true">8989M</td>
+								<td class="pt-3-half" contenteditable="true">a Fone of note</td>
+								<td class="pt-3-half" contenteditable="true">2</td>
+								<td class="pt-3-half" contenteditable="true">R 24220.00</td>
+								<td class="pt-3-half" contenteditable="true">Boyz Store</td>
+								<td class="pt-3-half" contenteditable="true">In Progress</td>
+								<td class="pt-3-half" contenteditable="true">22/07/2018</td>
+								<td>
+									<div class="btn-group">
+										<p data-placement="top" data-toggle="tooltip" title="Edit">
+											<button class="btn-xs" data-title="Edit" data-toggle="modal" data-target="#myModal" >
+												<i class="fas fa-pencil-alt"></i>
+											</button>
+										</p>
+										<p data-placement="top" data-toggle="tooltip" title="Close">
+											<button class="btn-danger btn-xs" data-title="Close" data-toggle="modal" data-target="#close" >
+												<i class="fa fa-archive"></i>
+											</button>
+										</p>
+									</div>
+								</td>
+							</tr>
+						   
+							<tr>
+								<td class="pt-3-half" contenteditable="false">12345</td>
+								<td class="pt-3-half" contenteditable="true">8989M</td>
+								<td class="pt-3-half" contenteditable="true">a Fone of note</td>
+								<td class="pt-3-half" contenteditable="true">2</td>
+								<td class="pt-3-half" contenteditable="true">R 24220.00</td>
+								<td class="pt-3-half" contenteditable="true">Boyz Store</td>
+								<td class="pt-3-half" contenteditable="true">In Progress</td>
+								<td class="pt-3-half" contenteditable="true">22/07/2018</td>
+								<td>
+									<div class="btn-group">
+										<p data-placement="top" data-toggle="tooltip" title="Edit">
+											<button class="btn-xs" data-title="Edit" data-toggle="modal" data-target="#mymodal" >
+												<i class="fas fa-pencil-alt"></i>
+											</button>
+										</p>
+										<p data-placement="top" data-toggle="tooltip" title="Close">
+											<button class="btn-danger btn-xs" data-title="Close" data-toggle="modal" data-target="#close" >
+												<i class="fa fa-archive"></i>
+											</button>
+										</p>
+									</div>
+								</td>
+							</tr>
+							
+							<tr class="hide">
+								<td class="pt-3-half" contenteditable="false">12345</td>
+								<td class="pt-3-half" contenteditable="true">8989M</td>
+								<td class="pt-3-half" contenteditable="true">a Fone of note</td>
+								<td class="pt-3-half" contenteditable="true">2</td>
+								<td class="pt-3-half" contenteditable="true">R 24220.00</td>
+								<td class="pt-3-half" contenteditable="true">Boyz Store</td>
+								<td class="pt-3-half" contenteditable="true">Completed</td>
+								<td class="pt-3-half" contenteditable="true">22/07/2018</td>
+								<td>
+									<div class="btn-group">
+										<p data-placement="top" data-toggle="tooltip" title="Edit">
+											<button class="btn-xs" data-title="Edit" data-toggle="modal" data-target="#mymodal" >
+												<i class="fas fa-pencil-alt"></i>
+											</button>
+										</p>
+										<p data-placement="top" data-toggle="tooltip" title="Close">
+											<button class="btn-danger btn-xs" data-title="Close" data-toggle="modal" data-target="#close" >
+												<i class="fa fa-archive"></i>
+											</button>
+										</p>
+									</div>
+								</td>
+							</tr>
+						</table>
+							</div>
+						</div>
+			  </div>
+			  <div class="tab-pane fade" id="v-pills-Documents" role="tabpanel" aria-labelledby="v-pills-Documents-tab">
+					<div class="card px-5 py-5">
+						<div class="input-group col-6">
+							<select id="docTypeDD">
+								<option value="">Document Type?</option>
+								<option value="POD">POD</option>
+								<option value="INVOICE">INVOICE</option>
+							</select>
+							<input class="form-control py-2 border-right-0 border" type="search" placeholder="Search" id="searchIn" >
+							<span class="input-group-append">
+								<button class="btn btn-outline-secondary border-left-0 border" type="button" id="btnDocSearch" >
+									<i class="fa fa-search"></i>
+								</button>
+							</span>
+						</div>
+						<div id="searchResultPOD" class="my-2 mx-2 hide">
+							<table class="table table-bordered table-responsive-md table-striped text-center">
+								<tr>
+									<th class="text-center">WCC ID</th>
+									<th class="text-center">Consignment Number</th>
+									<th class="text-center">Date Created</th>
+									<th class="text-center">Date Delivered</th>
+									<th class="text-center">Delivery Address</th>
+									<th class="text-center">Document</th>
+									<th class="text-center">Status</th>
+									<th class="text-center">Consignment ID</th>
+									
+								</tr>
+								<tr>
+									<td class="pt-3-half" contenteditable="false">ID_1058726</td>
+									<td class="pt-3-half" contenteditable="true">MTN63493394</td>
+									<td class="pt-3-half" contenteditable="true">22/07/2018</td>
+									<td class="pt-3-half" contenteditable="true">24/07/2018</td>
+									<td class="pt-3-half" contenteditable="true"><a href="#" download>Download POD</a></td>
+									<td class="pt-3-half" contenteditable="true">12 6th street Fairlands 2019</td>
+									<td class="pt-3-half" contenteditable="true">Delivered</td>
+									<td class="pt-3-half" contenteditable="true">207207755</td>
+									
+										
+								</tr>
+							</table>
+					
+						</div>
+						<div id="searchResultInvoice" class="my-2 mx-2 hide">
+							<table class="table table-bordered table-responsive-md table-striped text-center">
+								<tr>
+									<th class="text-center">Invoice Numer</th>
+									<th class="text-center">Date Created</th>
+									<th class="text-center">Document</th>
+									
+								</tr>
+								<tr>
+									<td class="pt-3-half" contenteditable="false">INV_1058726</td>
+									<td class="pt-3-half" contenteditable="true">22/07/2018</td>
+									<td class="pt-3-half" contenteditable="true"><a href="#" >Download POD</a></td>	
+								</tr>
+							</table>
+					
+						</div>
+						
+						
+					</div>
+			  </div>
+			  <!--<div class="tab-pane fade" id="v-pills-Queries" role="tabpanel" aria-labelledby="v-pills-Queries-tab">-->
+			
+				<!--</div>-->
+				<div class="card px-5 py-5">
+						<form class="form-inline">
+							<div class="md-form my-0 input-group d-none dfrom" id="dfParent">
+								<input class="form-control mr-sm-5 datepicker" type="text" placeholder="Date from" aria-label="Search" id="searchDateFrom">
+							</div>
+							<div class="md-form my-0 input-group d-none dto" id="dtParent">
+								<input class="form-control mr-sm-5 datepicker" type="text" placeholder="Date To" aria-label="Search" id="searchDateTo">
+							</div>
+							<div class="md-form my-0 input-group qt d-none">
+								<div class="input-group-append">
+									<input class="form-control form-control py-2 border-right-0 border" type="search" placeholder="Search" onkeyup="filterFunction(this.id,'ddChannel')" aria-label="Search" id="searchChannel" />
+									<span class="input-group-append">
+										<button class="btn btn-outline-secondary border-left-0" type="button" id="btnType" onclick="matchInput($('#ddChannel').val(),'btn-channel')">
+											<i class="fa fa-search"></i>
+										</button>
+									</span>
+									<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" id="btn-channel" aria-haspopup="true" aria-expanded="false"><span class="link">Orders Channel</span>
+									</button>
+									<div class="dropdown-menu lynt" id="ddChannel">
+									  <a class="dropdown-item" href="#"><span class="link">IOMS order number</span></a>
+									  <a class="dropdown-item" href="#"><span class="link">ID number</span></a>
+									  <a class="dropdown-item" href="#"><span class="link">ERP number</span></a>
+									  <div role="separator" class="dropdown-divider"></div>
+									  <a class="dropdown-item" href="#"><span class="link">UV number</span></a>
+									  <a class="dropdown-item" href="#"><span class="link">Helios number (222)</span></a>
+									  <a class="dropdown-item" href="#"><span class="link">Customer account number</span></a>
+									  <a class="dropdown-item" href="#"><span class="link">OMS PO number</span></a>
+									  <a class="dropdown-item" href="#"><span class="link">WMS Invoice number</span></a>
+									  <div role="separator" class="dropdown-divider"></div>
+									  <a class="dropdown-item" href="#"><span class="link">Channel</span></a>
+									  <a class="dropdown-item" href="#"><span class="link">Channel Partners</span></a>
+									  <a class="dropdown-item" href="#"><span class="link">Region</span></a>
+									  <a class="dropdown-item" href="#"><span class="link">Sales Representative</span></a>
+									  <a class="dropdown-item" href="#"><span class="link">Courier status</span></a>
+									  <div role="separator" class="dropdown-divider"></div>
+									  <a class="dropdown-item" href="#"><span class="link">WMS status</span></a>
+									  <a class="dropdown-item" href="#"><span class="link">Device (IMEI)</span></a>
+									  <a class="dropdown-item" href="#"><span class="link">Date range</span></a>
+									  <a class="dropdown-item" href="#"><span class="link">Remedy waybill number</span></a>
+									  <a class="dropdown-item" href="#"><span class="link">Work Order number (Remedy)</span></a>
+									  <div role="separator" class="dropdown-divider"></div>
+									  <a class="dropdown-item" href="#"><span class="link">Siebel number</span></a>
+									  <a class="dropdown-item" href="#"><span class="link">Collection number (RTT)</span></a>
+									  <a class="dropdown-item" href="#"><span class="link">Collection number (DSV</span></a>
+									  <a class="dropdown-item" href="#"><span class="link">Invoice number</span></a>
+									</div>
+								</div>
+							</div>
+							<div class="md-form my-0 input-group d-none qf">
+							<div class="input-group-append">
+								<input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" onkeyup="filterFunction(this.id,'ddWHS')" id="searchWHS">
+								<span class="input-group-append">
+									<button class="btn btn-outline-secondary border-left-0" type="button" id="btnFilter" onclick="matchInput($('#searchWHS').val())">
+										<i class="fa fa-search"></i>
+									</button>
+								</span>
+								<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="link">Orders WHS</span>
+								</button>
+								<div class="dropdown-menu lyntWHS" id="ddWHS">
+									<a class="dropdown-item" href="#"><span class="link">IOMS order number</span></a>
+									<a class="dropdown-item" href="#"><span class="link">ID number</span></a>
+									<a class="dropdown-item" href="#"><span class="link">Customer account number</span></a>
+									<a class="dropdown-item" href="#"><span class="link">OMS PO number</span></a>
+									<a class="dropdown-item" href="#"><span class="link">WMS Invoice number</span></a>
+									<div role="separator" class="dropdown-divider"></div>
+									<a class="dropdown-item" href="#"><span class="link">Product shipped (SKU)</span></a>
+									<a class="dropdown-item" href="#"><span class="link">Channel</span></a>
+									<a class="dropdown-item" href="#"><span class="link">Channel Partners</span></a>
+									<a class="dropdown-item" href="#"><span class="link">Store number</span></a>
+									<a class="dropdown-item" href="#"><span class="link">Dealer</span></a>
+									<div role="separator" class="dropdown-divider"></div>
+									<a class="dropdown-item" href="#"><span class="link">Courier status</span></a>
+									<a class="dropdown-item" href="#"><span class="link">WMS status</span></a>
+									<a class="dropdown-item" href="#"><span class="link">Device (IMEI)</span></a>
+									<a class="dropdown-item" href="#"><span class="link">Paused status</span></a>
+									<div role="separator" class="dropdown-divider"></div>
+									<a class="dropdown-item" href="#"><span class="link">Work Order number (Remedy)</span></a>
+									<a class="dropdown-item" href="#"><span class="link">Order number</span></a>
+									<a class="dropdown-item" href="#"><span class="link">Date range</span></a>
+								</div>
+							</div>
+							</div>
+							<div class="md-form my-0 input-group d-none qp">
+								<div class="input-group-append">
+								<input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" onkeyup="filterFunction(this.id,'ddCourier')" id="searchCourier"/>
+								<span class="input-group-append">
+									<button class="btn btn-outline-secondary border-left-0" type="button" id="btn-Priority" onclick="matchInput($('#searchCourier').val(), this.id)">
+										<i class="fa fa-search"></i>
+									</button>
+								</span>
+								<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" onclick="toggleShow('ddCourier')" aria-expanded="false"><span class="link">Orders Courier</span>
+								</button>
+								<div class="dropdown-menu lyntCourier" id="ddCourier">
+									<a class="dropdown-item" href="#"><span class="link">Waybill number</span></a>
+									<a class="dropdown-item" href="#"><span class="link">IOMS number</span></a>
+									<a class="dropdown-item" href="#"><span class="link">Invoice number</span></a>
+									<a class="dropdown-item" href="#"><span class="link">IMEI</span></a>
+									<a class="dropdown-item" href="#"><span class="link">Order number</span></a>
+								</div>
+								</div>
+							</div>
+							
+						</form>
+						<div class="my-2 mx-2">
+							<table class="table table-bordered table-responsive-md table-striped text-center d-none">
+							<tr>
+								<th class="text-center">Search Criteria</th>
+								<th class="text-center">SKU</th>
+								<th class="text-center">Description</th>
+								<th class="text-center">Quantity</th>
+								<th class="text-center">Amount</th>
+								<th class="text-center">Channel</th>
+								<th class="text-center">Status</th>
+								<th class="text-center">Date Created</th>
+								<th class="text-center"></th>
+							</tr>
+							<tr>
+								<td class="pt-3-half" contenteditable="false">12345</td>
+								<td class="pt-3-half" contenteditable="true">8989M</td>
+								<td class="pt-3-half" contenteditable="true">a Fone of note</td>
+								<td class="pt-3-half" contenteditable="true">2</td>
+								<td class="pt-3-half" contenteditable="true">R 24220.00</td>
+								<td class="pt-3-half" contenteditable="true">Boyz Store</td>
+								<td class="pt-3-half" contenteditable="true">In Progress</td>
+								<td class="pt-3-half" contenteditable="true">22/07/2018</td>
+								<td class="pt-3-half">
+									<div class="btn-group">
+										<p data-placement="top" data-toggle="tooltip" title="Edit">
+											<button class="btn-xs" data-title="Edit" data-toggle="modal" id="btn-edit" data-target="#myModal" >
+												<i class="fas fa-pencil-alt"></i>
+											</button>
+										</p>
+										<p data-placement="top" data-toggle="tooltip" title="Close">
+											<button class="btn-danger btn-xs" data-title="Close" data-toggle="modal" data-target="#close" >
+												<i class="fa fa-archive"></i>
+											</button>
+										</p>
+									</div>
+								</td>	
+							</tr>
+						   
+							<tr>
+								<td class="pt-3-half" contenteditable="false">12345</td>
+								<td class="pt-3-half" contenteditable="true">8989M</td>
+								<td class="pt-3-half" contenteditable="true">a Fone of note</td>
+								<td class="pt-3-half" contenteditable="true">2</td>
+								<td class="pt-3-half" contenteditable="true">R 24220.00</td>
+								<td class="pt-3-half" contenteditable="true">Boyz Store</td>
+								<td class="pt-3-half" contenteditable="true">In Progress</td>
+								<td class="pt-3-half" contenteditable="true">22/07/2018</td>
+								<td>
+									<div class="btn-group">
+										<p data-placement="top" data-toggle="tooltip" title="Edit">
+											<button class="btn-xs" data-title="Edit" data-toggle="modal" data-target="#myModal" >
+												<i class="fas fa-pencil-alt"></i>
+											</button>
+										</p>
+										<p data-placement="top" data-toggle="tooltip" title="Close">
+											<button class="btn-danger btn-xs" data-title="Close" data-toggle="modal" data-target="#close" >
+												<i class="fa fa-archive"></i>
+											</button>
+										</p>
+									</div>
+								</td>
+							</tr>
+						   
+							<tr>
+								<td class="pt-3-half" contenteditable="false">12345</td>
+								<td class="pt-3-half" contenteditable="true">8989M</td>
+								<td class="pt-3-half" contenteditable="true">a Fone of note</td>
+								<td class="pt-3-half" contenteditable="true">2</td>
+								<td class="pt-3-half" contenteditable="true">R 24220.00</td>
+								<td class="pt-3-half" contenteditable="true">Boyz Store</td>
+								<td class="pt-3-half" contenteditable="true">In Progress</td>
+								<td class="pt-3-half" contenteditable="true">22/07/2018</td>
+								<td>
+									<div class="btn-group">
+										<p data-placement="top" data-toggle="tooltip" title="Edit">
+											<button class="btn-xs" data-title="Edit" data-toggle="modal" data-target="#mymodal" >
+												<i class="fas fa-pencil-alt"></i>
+											</button>
+										</p>
+										<p data-placement="top" data-toggle="tooltip" title="Close">
+											<button class="btn-danger btn-xs" data-title="Close" data-toggle="modal" data-target="#close" >
+												<i class="fa fa-archive"></i>
+											</button>
+										</p>
+									</div>
+								</td>
+							</tr>
+							
+							<tr class="hide">
+								<td class="pt-3-half" contenteditable="false">12345</td>
+								<td class="pt-3-half" contenteditable="true">8989M</td>
+								<td class="pt-3-half" contenteditable="true">a Fone of note</td>
+								<td class="pt-3-half" contenteditable="true">2</td>
+								<td class="pt-3-half" contenteditable="true">R 24220.00</td>
+								<td class="pt-3-half" contenteditable="true">Boyz Store</td>
+								<td class="pt-3-half" contenteditable="true">Completed</td>
+								<td class="pt-3-half" contenteditable="true">22/07/2018</td>
+								<td>
+									<div class="btn-group">
+										<p data-placement="top" data-toggle="tooltip" title="Edit">
+											<button class="btn-xs" data-title="Edit" data-toggle="modal" data-target="#mymodal" >
+												<i class="fas fa-pencil-alt"></i>
+											</button>
+										</p>
+										<p data-placement="top" data-toggle="tooltip" title="Close">
+											<button class="btn-danger btn-xs" data-title="Close" data-toggle="modal" data-target="#close" >
+												<i class="fa fa-archive"></i>
+											</button>
+										</p>
+									</div>
+								</td>
+							</tr>
+						</table>
+					
+						</div>
+					</div>
+			    </div>
+			  <div class="tab-pane fade" id="v-pills-Reports" role="tabpanel" aria-labelledby="v-pills-Reports-tab">
+					<div class="card px-5">
+						<div class="input-group col-md-4">
+							<input class="form-control py-2 border-right-0 border" type="search" placeholder="Search" id="searchIn" onkeyup="find()">
+							<span class="input-group-append">
+								<button class="btn btn-outline-secondary border-left-0 border" type="button" id="btnPageSearch" onclick="find()">
+									<i class="fa fa-search"></i>
+								</button>
+							</span>
+						</div>
+					</div>
+			  </div>
+			</div>
+		  </div>
+		</div>
+
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">Edit Query Description</h4>
+					</div>
+					<form method="post" action="">
+						<div class="modal-body">
+							<div class="form-group">
+								<input class="form-control" type="hidden" name="content">
+								<label for="heading">Enter Description of Query</label>
+								<textarea class="form-control" id="qdesc"  rows="4" name="content"></textarea>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							<button type="submit" class="btn btn-primary">Save changes</button>
+						</div>
+					</form>
+				</div>	
+			</div>
+	</div>
+	
+    </main>
+
+    <!-- MAIN Content-->
+
+    <footer class="container-fluid bg-primary text-white fixed-bottom py-3" id="footer">
+        <div class="row">
+            <div class="col-lg-12" style="text-align: center">
+                <h6>
+                    © 2018 Mobile Telephone Networks. All rights reserved.
+                    <a>Privacy Policy</a>
+                </h6>
+            </div>
+        </div>
+    </footer>  
+
+    <script src="../js/jquery.js"></script>
+    <script src="../js/popper.js"></script>
+    <script src="../js/bootstrap.js"></script>
+    <script src="../js/gijgo.min.js"></script>
+    <script src="../js/scripts.js"></script>
+	<script>
+	function showSearch() {
+		//alert("showSearch()");
+		$(".qf").removeClass("d-none");
+		
+	}
+	function hideSearch() {
+		//alert("showSearch()");
+		$(".qf").addClass("d-none");
+		
+	}
+	function showMenu(id) {
+		if (id=='menuToggle'){
+			$("#radmenu").removeClass("d-none");
+			$("#menuToggle").addClass("d-none");
+		}else{
+			$("#radmenu").addClass("d-none");
+			$("#menuToggle").removeClass("d-none");
+		}
+	}
+	
+	$(document).ready(function(){
+		
+		$('#btnDocSearch').on('click',function(){
+			var op = $('#docTypeDD option:selected').val();
+			
+			console.log(op);
+			
+			if(op == "POD")
+			{
+				console.log(op);
+				$('#searchResultInvoice').addClass('hide');
+				$('#searchResultPOD').removeClass('hide');
+			}
+			else if(op == "INVOICE"){
+				console.log(op);
+				$('#searchResultInvoice').removeClass('hide');
+				$('#searchResultPOD').addClass('hide');
+			}else{
+				alert("Select document Type");
+			}
+			
+		});
+		
+		
+		//var alertLst = ["ex1","ex2"];
+		//var alrts = ['<div id="ex1" class="alert alert-warning" role="alert"><strong>5 Order!</strong> Actions Waiting for you<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>','<div id="ex2" class="alert alert-warning" role="alert"><strong>2 Queries Logged!</strong>  Waiting for you<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>']
+			
+		showALL();
+			
+		$('#v-pills-tab a').on('click',function(){
+			var label = $(this).attr('aria-label');
+				
+			$(pageName).html(label);
+				
+			if($(this).attr('id') == "v-pills-home-tab")
+			{
+				showALL();
+			}
+			else
+			{
+				closeALL();
+			}		
+		});
+			
+			//Show all Alerts
+		/*	
+		function showALL()
+		{
+			for(var i in alrts)
+			{
+				$('#homeTab').append(alrts[i]);
+			}
+			
+			
+		}*/
+		
+				
+		function closeALL()
+		{
+			for(l in alertLst)
+			{
+				console.log($(alertLst[l]));
+				$('#'+alertLst[l]).alert('close');	
+			}
+		
+		}
+			
+		$('.close').on('click', function () 
+		{
+			
+			console.log(alrts.pop(alertLst.indexOf($(this).parent().attr('id'))));
+		});
+	});
+	
+	var prevType = '.qt';
+		
+		$(".lynt a").click(function(){
+			$("#searchChannel").val($(this).text());
+			
+		});
+		$(".lyntWHS a").click(function(){
+			$("#searchWHS").val($(this).text());
+		});
+		
+		$(".lyntCourier a").click(function(){
+			$("#searchCourier").val($(this).text());
+		});
+		$(".lyntChanSupp a").click(function(){
+			$("#searchChanSupp").val($(this).text());
+		});
+		$(".lyntAssignee a").click(function(){
+			$("#searchAssignee").val($(this).text());
+		});
+	   		
+		$('#searchInput').keypress(function(event){
+			var keycode = (event.keyCode ? event.keyCode : event.which);
+			if(keycode == '13'){
+				//alert($(this).text());
+				matchInput($("#searchInput").val());
+				
+			}
+		});
+		$('#searchQueryFilter').keypress(function(event){
+			var keycode = (event.keyCode ? event.keyCode : event.which);
+			if(keycode == '13'){
+				
+				if($("#btn-channel").text()==='Query Status'){
+					$(`${prevType}`).addClass("d-none");
+					$(".qs").removeClass("d-none");
+				}
+				if($("#searchQueryFilter").val()==='Date Range'){
+					$(".dfrom").removeClass("d-none");
+					$(".dto").removeClass("d-none");
+				}
+				if($("#searchQueryFilter").val()!='Date Range'){
+					if(!$("dfParent").hasClass("d-none")){
+						$(".dfrom").addClass("d-none");
+						$(".dto").addClass("d-none");
+					}
+				}
+				if($("#searchQueryFilter").val()==='Date Range'){
+					$(".qt").addClass("d-none");
+					$(".df").removeClass("d-none");
+					$(".dt").removeClass("d-none");
+				}
+				if($("#searchQueryFilter").val()==='Assignee'){
+					$(".qa").addClass("d-none");
+					$(".df").removeClass("d-none");
+					$(".dt").removeClass("d-none");
+				}
+				if($("#searchQueryFilter").val()==='CreatedBy'){
+					$(".qa").addClass("d-none");
+					$(".df").removeClass("d-none");
+					$(".dt").removeClass("d-none");
+				}
+				if($("#searchQueryFilter").val()==='Last Fifty'){
+					$(".df").removeClass("d-none");
+					$(".dt").removeClass("d-none");
+				}
+			}	
+		});
+		$('#searchQueryStatus').keypress(function(event){
+			var keycode = (event.keyCode ? event.keyCode : event.which);
+			if(keycode == '13'){
+				//alert("btn value  " + $(".bt-stat").text());
+				if($(".bt-stat").text()==='Query Status'){
+					$("#queryTable").removeClass("d-none");
+				}
+			}
+		});
+		
+		function matchInput(searchText, btnValue){
+			
+			var btnArr = ["btn-assign", "btn-Priority", "btn-status","btn-channel"];
+			if (searchText==='Order Status'){
+				$(".qf").removeClass("d-none");
+				$(`${prevType}`).addClass("d-none");
+				prevType = ".qf";
+				return;					
+			}
+			if (searchText==='Query Status'){
+				$(`${prevType}`).addClass("d-none");
+				$(".qs").removeClass("d-none");
+				prevType = ".qs";
+									
+			}
+			if (searchText==='Assignee'){
+				$(`${prevType}`).addClass("d-none");
+				$(".qa").removeClass("d-none");
+				prevType = ".qa";
+				return;
+			}
+			if (searchText==='Priority'){
+				$(".qp").removeClass("d-none");
+				$(`${prevType}`).addClass("d-none");
+				prevType = ".qp";
+				
+				return;					
+			}
+			/*
+			if (searchText==='btnType'){
+				$(".qf").removeClass("d-none");
+				$(`${prevType}`).addClass("d-none");
+				prevType = ".qf";
+				return;
+			}
+				if($("#searchQueryFilter").val()==='Query Status'){
+					$(`${prevType}`).addClass("d-none");
+					$(".qs").removeClass("d-none");
+				}*/
+				if($("#searchQueryFilter").val()==='Date Range'){
+					$(".dfrom").removeClass("d-none");
+					$(".dto").removeClass("d-none");
+				}
+				if($("#searchQueryFilter").val()!='Date Range'){
+					if(!$("dfParent").hasClass("d-none")){
+						$(".dfrom").addClass("d-none");
+						$(".dto").addClass("d-none");
+					}
+				}
+				if($("#searchQueryFilter").val()==='Date Range'){
+					$(".qt").addClass("d-none");
+					$(".df").removeClass("d-none");
+					$(".dt").removeClass("d-none");
+				}
+				if($("#searchQueryFilter").val()==='Assignee'){
+					$(".qa").addClass("d-none");
+					$(".df").removeClass("d-none");
+					$(".dt").removeClass("d-none");
+				}
+				if($("#searchQueryFilter").val()==='CreatedBy'){
+					$(".qa").addClass("d-none");
+					$(".df").removeClass("d-none");
+					$(".dt").removeClass("d-none");
+				}
+				if($("#searchQueryFilter").val()==='Last Fifty'){
+					$(".df").removeClass("d-none");
+					$(".dt").removeClass("d-none");
+				}
+				if(btnArr.includes(btnValue)) {
+					$("#queryTable").removeClass("d-none");
+				}
+								
+		}
+	var find = ()=> {
+	
+	  var input, filter, table, tr, td, i;
+	  input = document.getElementById("searchIn");
+	  filter = input.value.toUpperCase();
+	  table = document.getElementById("queryTable");
+	  tr = table.getElementsByTagName("tr");
+	  cols = table.getElementsByTagName("td");
+	  var found = 0;
+	  
+	  //look for filter string in all cols
+	  for (y = 0; y < cols.length; y++) {
+		found = 0;
+	  // Loop through all table rows, and hide those who don't match the search query
+		  for (i = 0; i < tr.length; i++) {
+			td = tr[i].getElementsByTagName("td")[y];
+			if (td) {
+			  if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+				tr[i].style.display = "";
+				found = 1;
+			  } else {
+				tr[i].style.display = "none";
+			  }
+			}
+		  }
+		  if (found){
+			return;
+		  }
+		}  
+	};
+		$(document).ready(function(){
+		    var modal = document.getElementById('myModal');
+
+			// Get the button that opens the modal
+			var btn = document.getElementById("btn-edit");
+            //var btn = $('#btn-edit');
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close")[0];
+
+			// When the user clicks on the button, open the modal
+			btn.onclick = function() {
+				modal.style.display = "block";
+			}
+
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function() {
+				modal.style.display = "none";
+			}
+
+			// When the user clicks anywhere outside of the modal, close it
+			window.onclick = function(event) {
+				if (event.target == modal) {
+					modal.style.display = "none";
+				}
+			} 
+		}); 
+		function toggleShow(id) {
+			document.getElementById(id).classList.toggle("show");
+		}
+
+		function filterFunction(searchId, ddId) {
+			var input, filter, ul, li, a, i;
+			input = document.getElementById(searchId);
+			filter = input.value.toUpperCase();
+			div = document.getElementById(ddId);
+			a = div.getElementsByTagName("a");
+			
+			for (i = 0; i < a.length; i++) {
+				if (a[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
+					a[i].style.display = "";
+				} else {
+					a[i].style.display = "none";
+				}
+			}
+		}
+	</script>
+</body>
+
+</html>

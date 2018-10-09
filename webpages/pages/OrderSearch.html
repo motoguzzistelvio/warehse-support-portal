@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Warehouse Self-Service Portal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" href="../css/fonts/fonts.css">
+    <link rel="stylesheet" href="../css/bootstrap.css" media="screen">
+    <link rel="stylesheet" href="../css/gijgo.min.css">
+    <link rel="stylesheet" href="../css/fontawesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+	<style>
+	.purple-border textarea {
+		border: 1px solid #ba68c8;
+	}
+	.purple-border .form-control:focus {
+		border: 1px solid #ba68c8;
+		box-shadow: 0 0 0 0.2rem rgba(186, 104, 200, .25);
+	}
+	.green-border-focus .form-control:focus {
+		border: 1px solid #8bc34a;
+		box-shadow: 0 0 0 0.2rem rgba(139, 195, 74, .25);
+	}
+	/* Modal Content/Box */
+	.modal-content {
+		background-color: #fefefe;
+		margin: 15% auto; /* 15% from the top and centered */
+		padding: 20px;
+		border: 1px solid #888;
+		width: 80%; /* Could be more or less, depending on screen size */
+	}
+
+	/* The Close Button */
+	.close {
+		color: #aaa;
+		float: right;
+		font-size: 28px;
+		font-weight: bold;
+	}
+
+	.close:hover,
+	.close:focus {
+		color: black;
+		text-decoration: none;
+		cursor: pointer;
+	}
+	.link {
+		text-transform: capitalize;
+	}
+	</style>
+</head>
+
+<body>
+	<div class="container-fluid bg-dark">
+		<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+			<div class="mx-auto order-0 order-md-0 w-50">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item">
+						<a class="nav-link" href="#">
+							<i class="fas fa-sign-in-alt"></i> <span class="link">Login</span>
+						</a>
+					</li>
+				</ul>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+			</div>
+			<div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuTic" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<span class="link"><i class="fas fa-ticket-alt "></i> Tickets</span>
+						</a>
+						<div class="dropdown-menu link" aria-labelledby="#navbarDropdownMenuTic">
+							<a class="dropdown-item" href="#"><span class="link">Create Remedy Ticket</span></a>
+							<a class="dropdown-item" href="#"><span class="link">View Remedy Tickets</span></a>
+							<a class="dropdown-item" href="#"><span class="link">Manage Remedy Tickets</span></a>
+							<a class="dropdown-item" href="#"><span class="link">View Siebel Tickets</span></a>
+						</div>
+						
+					</li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuQLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							 <span class="link"><i class="fas fa-list-alt"></i> Queries</span>
+						</a>
+						<div class="dropdown-menu" aria-labelledby="#navbarDropdownMenuQLink">
+							<a class="dropdown-item" href="CreateQuery.html"><span class="link">Log Query</span></a>
+							<a class="dropdown-item" href="#"><span class="link">Update Status</span></a>
+							<a class="dropdown-item" href="#"><span class="link">Close Query</span></a>
+							<a class="dropdown-item" href="#"><span class="link">Re-open Query</span></a>
+							<a class="dropdown-item" href="#"><span class="link">View Queries</span></a>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div class="navbar-collapse collapse w-100 order-2 order-md-0 dual-collapse2">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuTLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<i class="fas fa-mobile"></i> <span class="link">Device Status</span>
+						</a>
+						<div class="dropdown-menu" aria-labelledby="#navbarDropdownMenuTLink">
+							<a class="dropdown-item" href="#"><span class="link">Orders</span></a>
+							<a class="dropdown-item" href="#"><span class="link">Returns</span></a>
+							<a class="dropdown-item" href="#"><span class="link">Collections</span></a>
+							<a class="dropdown-item" href="#"><span class="link">RMA Status</span></a>
+						</div>
+					</li>
+				</ul>
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuDLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<i class="far fa-file"></i> <span class="link">Docs</span>
+						</a>
+						<div class="dropdown-menu" aria-labelledby="#navbarDropdownMenuDLink">
+							<a class="dropdown-item" href="#">POD</a>
+							<a class="dropdown-item" href="#"><span class="link">Tax Invoices</span></a>
+						</div>
+					</li>
+				</ul>
+				<ul class="navbar-nav ms-auto">
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuDLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<i class="far fa-file"></i> <span class="link">Reports</span>
+						</a>
+						<div class="dropdown-menu" aria-labelledby="#navbarDropdownMenuDLink">
+							<a class="dropdown-item" href="#"><span class="link">Queries logged</span></a>
+							<a class="dropdown-item" href="#"><span class="link">Paused Orders</span></a>
+							<a class="dropdown-item" href="#"><span class="link">Order Status</span></a>
+							<a class="dropdown-item" href="#"><span class="link">Collections/Returns</span></a>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div class="navbar-collapse collapse w-100 order-3 order-md-0 dual-collapse2">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuAdmin" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<i class="fab fa-android"></i> <span class="link">Actions</span>
+						</a>
+						<div class="dropdown-menu" aria-labelledby="#navbarDropdownMenuAdmin">
+							<a class="dropdown-item" href="#"><span class="link">User</span></a>
+							<a class="dropdown-item" href="#"><span class="link">Assign Query</span></a>
+							<a class="dropdown-item" href="#"><span class="link">Escalations</span></a>
+							<a class="dropdown-item" href="#"><span class="link">Pause Order</span></a>
+							<a class="dropdown-item" href="#"><span class="link">Capture alt Contact Details</span></a>
+							<a class="dropdown-item" href="#"><span class="link">Ack alt Contact Details</span></a>
+						</div>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#" id="navbarMenuLogout">
+							<i class="fas fa-sign-out-alt"></i> <span class="link">Logout</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+	</div>
+    <div class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <a href="/" class="navbar-brand">
+                        <img src="../img/logo.jpg"> MTN </a>
+                 <span class="navbar-text"><i class="far fa-user"></i> Lynton Hegele</span>
+                </div>
+			</div>		
+			<div class="collapse navbar-collapse" id="navbarSearch">
+				<form class="form-inline ml-auto">
+					<div class="md-form my-0 input-group d-none dfrom" id="dfParent">
+						<input class="form-control mr-sm-5 datepicker" type="text" placeholder="Date from" aria-label="Search" id="searchDateFrom">
+					</div>
+					<div class="md-form my-0 input-group d-none dto" id="dtParent">
+						<input class="form-control mr-sm-5 datepicker" type="text" placeholder="Date To" aria-label="Search" id="searchDateTo">
+					</div>
+					
+					<div class="md-form my-0 input-group qt">
+						
+						<div class="input-group-append">
+							<input class="form-control form-control py-2 border-right-0 border" type="search" placeholder="Search" onkeyup="filterFunction(this.id,'ddChannel')" aria-label="Search" id="searchChannel">
+						<span class="input-group-append">
+							<button class="btn btn-outline-secondary border-left-0" type="button" id="btnType" onclick="matchInput($('#ddChannel').val(),'btn-channel')">
+								<i class="fa fa-search"></i>
+							</button>
+						</span>
+							<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" id="btn-channel" aria-haspopup="true" aria-expanded="false"><span class="link">Orders Channel</span></button>
+							<div class="dropdown-menu lynt" id="ddChannel">
+							  <a class="dropdown-item" href="#"><span class="link">IOMS order number</span></a>
+							  <a class="dropdown-item" href="#"><span class="link">ID number</span></a>
+							  <a class="dropdown-item" href="#"><span class="link">ERP number</span></a>
+							  <div role="separator" class="dropdown-divider"></div>
+							  <a class="dropdown-item" href="#"><span class="link">UV number</span></a>
+							  <a class="dropdown-item" href="#"><span class="link">Helios number (222)</span></a>
+							  <a class="dropdown-item" href="#"><span class="link">Customer account number</span></a>
+							  <a class="dropdown-item" href="#"><span class="link">OMS PO number</span></a>
+							  <a class="dropdown-item" href="#"><span class="link">WMS Invoice number</span></a>
+							  <div role="separator" class="dropdown-divider"></div>
+							  <a class="dropdown-item" href="#"><span class="link">Channel</span></a>
+							  <a class="dropdown-item" href="#"><span class="link">Channel Partners</span></a>
+							  <a class="dropdown-item" href="#"><span class="link">Region</span></a>
+							  <a class="dropdown-item" href="#"><span class="link">Sales Representative</span></a>
+							  <a class="dropdown-item" href="#"><span class="link">Courier status</span></a>
+							  <div role="separator" class="dropdown-divider"></div>
+							  <a class="dropdown-item" href="#"><span class="link">WMS status</span></a>
+							  <a class="dropdown-item" href="#"><span class="link">Device (IMEI)</span></a>
+							  <a class="dropdown-item" href="#"><span class="link">Date range</span></a>
+							  <a class="dropdown-item" href="#"><span class="link">Remedy waybill number</span></a>
+							  <a class="dropdown-item" href="#"><span class="link">Work Order number (Remedy)</span></a>
+							  <div role="separator" class="dropdown-divider"></div>
+							  <a class="dropdown-item" href="#"><span class="link">Siebel number</span></a>
+							  <a class="dropdown-item" href="#"><span class="link">Collection number (RTT)</span></a>
+							  <a class="dropdown-item" href="#"><span class="link">Collection number (DSV</span></a>
+							  <a class="dropdown-item" href="#"><span class="link">Invoice number</span></a>
+							</div>
+						</div>
+					</div>
+					<div class="md-form my-0 input-group d-none qf">
+						<div class="input-group-append">
+							<input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" onkeyup="filterFunction(this.id,'ddWHS')" id="searchWHS">
+							<span class="input-group-append">
+								<button class="btn btn-outline-secondary border-left-0" type="button" id="btnFilter" onclick="matchInput($('#searchWHS').val())">
+									<i class="fa fa-search"></i>
+								</button>
+							</span>
+							<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="link">Orders WHS</span></button>
+							<div class="dropdown-menu lyntWHS" id="ddWHS">
+							  	<a class="dropdown-item" href="#"><span class="link">IOMS order number</span></a>
+								<a class="dropdown-item" href="#"><span class="link">ID number</span></a>
+								<a class="dropdown-item" href="#"><span class="link">Customer account number</span></a>
+								<a class="dropdown-item" href="#"><span class="link">OMS PO number</span></a>
+								<a class="dropdown-item" href="#"><span class="link">WMS Invoice number</span></a>
+								<div role="separator" class="dropdown-divider"></div>
+								<a class="dropdown-item" href="#"><span class="link">Product shipped (SKU)</span></a>
+								<a class="dropdown-item" href="#"><span class="link">Channel</span></a>
+								<a class="dropdown-item" href="#"><span class="link">Channel Partners</span></a>
+								<a class="dropdown-item" href="#"><span class="link">Store number</span></a>
+								<a class="dropdown-item" href="#"><span class="link">Dealer</span></a>
+								<div role="separator" class="dropdown-divider"></div>
+								<a class="dropdown-item" href="#"><span class="link">Courier status</span></a>
+								<a class="dropdown-item" href="#"><span class="link">WMS status</span></a>
+								<a class="dropdown-item" href="#"><span class="link">Device (IMEI)</span></a>
+								<a class="dropdown-item" href="#"><span class="link">Paused status</span></a>
+								<div role="separator" class="dropdown-divider"></div>
+								<a class="dropdown-item" href="#"><span class="link">Work Order number (Remedy)</span></a>
+								<a class="dropdown-item" href="#"><span class="link">Order number</span></a>
+								<a class="dropdown-item" href="#"><span class="link">Date range</span></a>
+							</div>
+						</div>
+					</div>
+					<div class="md-form my-0 input-group d-none qp">
+						<div class="input-group-append">
+							<input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" onkeyup="filterFunction(this.id,'ddCourier')" id="searchCourier">
+							<span class="input-group-append">
+								<button class="btn btn-outline-secondary border-left-0" type="button" id="btn-Priority" onclick="matchInput($('#searchCourier').val(), this.id)">
+									<i class="fa fa-search"></i>
+								</button>
+							</span>
+							<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" onclick="toggleShow('ddCourier')" aria-expanded="false"><span class="link">Orders Courier</span></button>
+							<div class="dropdown-menu lyntCourier" id="ddCourier">
+								<a class="dropdown-item" href="#"><span class="link">Waybill number</span></a>
+								<a class="dropdown-item" href="#"><span class="link">IOMS number</span></a>
+								<a class="dropdown-item" href="#"><span class="link">Invoice number</span></a>
+								<a class="dropdown-item" href="#"><span class="link">IMEI</span></a>
+								<a class="dropdown-item" href="#"><span class="link">Order number</span></a>
+							</div>
+						</div>
+					</div>
+					<div class="md-form my-0 input-group d-none qs"> 
+						<div class="input-group-append">
+							<input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" id="searchChanSupp">
+						<span class="input-group-append">
+							<button class="btn btn-outline-secondary border-left-0" type="button" id="btn-chanSupp" onclick="matchInput($('#searchChanSupp').val(),this.id)">
+								<i class="fa fa-search"></i>
+							</button>
+						</span>
+							<button class="btn btn-outline-secondary dropdown-toggle bt-stat" type="button" data-toggle="dropdown" aria-haspopup="true" onclick="toggleShow('ddChanSupp')"><span class="link">Query Status</button>
+							<div class="dropdown-menu lyntChanSupp" id="ddChanSupp">
+							   <a class="dropdown-item" href="#"><span class="link">Courier status</span></a>
+								<a class="dropdown-item" href="#"><span class="link">Dealer</span></a>
+								<a class="dropdown-item" href="#"><span class="link">Store number</span></a>
+								<a class="dropdown-item" href="#"><span class="link">Channel</span></a>
+								<a class="dropdown-item" href="#"><span class="link">Channel Partner</span></a>
+								<div role="separator" class="dropdown-divider"></div>
+								<a class="dropdown-item" href="#"><span class="link">Region</span></a>
+								<a class="dropdown-item" href="#"><span class="link">WMS status</span></a>
+								<a class="dropdown-item" href="#"><span class="link">UV number</span></a>
+								<div role="separator" class="dropdown-divider"></div>
+								<a class="dropdown-item" href="#"><span class="link">ID number</span></a>
+								<a class="dropdown-item" href="#"><span class="link">Cell Number</span></a>
+								<a class="dropdown-item" href="#"><span class="link">Work Order number (Remedy)</span></a>
+							</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+    </div>
+  
+    <!-- MAIN Content wher form will be -->
+
+    <main class="container-fluid col-md-12" style="text-align:center">
+		<input type="hidden" id="typeSearchId">
+		<input type="hidden" id="filterSearchId">
+		<input type="hidden" id="statusSearchId">
+		
+		<div class="mx-5 col-md-11 row justify-content-center">
+			<div class="form-group purple-border col-md-10 d-none" id="orderStat">
+				<label for="TextareaOrderstat">Create Order Status Query</label>
+				<textarea class="form-control" id="TextareaOrderstat" rows="4"></textarea>
+			</div>
+		</div>
+		<div class="mx-5 col-md-11 row justify-content-center">
+			<div class="form-group purple-border col-md-10 d-none" id="priority">
+				<label for="TextareaOrderstat">Create Priority Query</label>
+				<textarea class="form-control" id="TextareaOrderstat" rows="4"></textarea>
+			</div>
+		</div>
+		<div class="mx-5 col-md-11 row justify-content-center">
+			<div class="form-group purple-border col-md-10 d-none" id="returns">
+				<label for="TextareaOrderstat">Create Returns Query</label>
+				<textarea class="form-control" id="TextareaOrderstat" rows="4"></textarea>
+			</div>
+		</div>
+		<div class="mx-5 col-md-11 row justify-content-center">
+			<div class="form-group purple-border col-md-10 d-none" id="collections">
+				<label for="TextareaOrderstat">Create Collections Query</label>
+				<textarea class="form-control" id="TextareaOrderstat" rows="4"></textarea>
+			</div>
+		</div>
+		<div class="mx-5 col-md-11 row justify-content-center">
+			<div class="form-group purple-border col-md-10 d-none" id="repairs">
+				<label for="TextareaOrderstat">Create Repairs/warranty assessment Query</label>
+				<textarea class="form-control" id="TextareaOrderstat" rows="4"></textarea>
+			</div>
+		</div>
+		<div class="mx-5 col-md-11 row justify-content-center">
+			<div class="form-group purple-border col-md-10 d-none" id="other">
+				<label for="TextareaOrderstat">Create Other Query Type</label>
+				<textarea class="form-control" id="TextareaOrderstat" rows="4"></textarea>
+			</div>
+		</div>
+		<div class="card d-none" id="queryTable">
+			<h5 class="card-header text-center font-weight-bold py-4">Orders</h5>
+			<div class="card-body ">
+				<div class="input-group col-md-4">
+					<input class="form-control py-2 border-right-0 border" type="search" placeholder="Search" id="searchIn" onkeyup="find()">
+					<span class="input-group-append">
+						<button class="btn btn-outline-secondary border-left-0 border" type="button" id="btnPageSearch" onclick="find()">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+				<br/>
+				<div id="queryTable" class="table-editable">
+				<!--<span class="table-add float-right mb-3 mr-2"><a href="#!" class="text-success"><i class="fa fa-plus fa-2x" aria-hidden="true"></i></a></span>-->
+				<table class="table table-bordered table-responsive-md table-striped text-center">
+					<tr>
+						<th class="text-center">Search Criteria</th>
+						<th class="text-center">SKU</th>
+						<th class="text-center">Description</th>
+						<th class="text-center">Quantity</th>
+						<th class="text-center">Amount</th>
+						<th class="text-center">Channel</th>
+						<th class="text-center">Status</th>
+						<th class="text-center">Date Created</th>
+						<th class="text-center"></th>
+					</tr>
+					<tr>
+						<td class="pt-3-half" contenteditable="false">12345</td>
+						<td class="pt-3-half" contenteditable="true">8989M</td>
+						<td class="pt-3-half" contenteditable="true">a Fone of note</td>
+						<td class="pt-3-half" contenteditable="true">2</td>
+						<td class="pt-3-half" contenteditable="true">R 24220.00</td>
+						<td class="pt-3-half" contenteditable="true">Boyz Store</td>
+						<td class="pt-3-half" contenteditable="true">In Progress</td>
+						<td class="pt-3-half" contenteditable="true">22/07/2018</td>
+						<!--
+						<td class="pt-3-half">
+							<span class="table-up"><a href="#!" class="indigo-text"><i class="fa fa-long-arrow-up" aria-hidden="true"></i></a></span>
+							<span class="table-down"><a href="#!" class="indigo-text"><i class="fa fa-long-arrow-down" aria-hidden="true"></i></a></span>
+						</td>-->
+						<td class="pt-3-half">
+							<div class="btn-group">
+								<p data-placement="top" data-toggle="tooltip" title="Edit">
+									<button class="btn-xs" data-title="Edit" data-toggle="modal" id="btn-edit" data-target="#myModal" >
+										<i class="fas fa-pencil-alt"></i>
+									</button>
+								</p>
+								<p data-placement="top" data-toggle="tooltip" title="Close">
+									<button class="btn-danger btn-xs" data-title="Close" data-toggle="modal" data-target="#close" >
+										<i class="fa fa-archive"></i>
+									</button>
+								</p>
+							</div>
+						</td>	
+					</tr>
+				   
+					<tr>
+						<td class="pt-3-half" contenteditable="false">12345</td>
+						<td class="pt-3-half" contenteditable="true">8989M</td>
+						<td class="pt-3-half" contenteditable="true">a Fone of note</td>
+						<td class="pt-3-half" contenteditable="true">2</td>
+						<td class="pt-3-half" contenteditable="true">R 24220.00</td>
+						<td class="pt-3-half" contenteditable="true">Boyz Store</td>
+						<td class="pt-3-half" contenteditable="true">In Progress</td>
+						<td class="pt-3-half" contenteditable="true">22/07/2018</td>
+						<td>
+							<div class="btn-group">
+								<p data-placement="top" data-toggle="tooltip" title="Edit">
+									<button class="btn-xs" data-title="Edit" data-toggle="modal" data-target="#myModal" >
+										<i class="fas fa-pencil-alt"></i>
+									</button>
+								</p>
+								<p data-placement="top" data-toggle="tooltip" title="Close">
+									<button class="btn-danger btn-xs" data-title="Close" data-toggle="modal" data-target="#close" >
+										<i class="fa fa-archive"></i>
+									</button>
+								</p>
+							</div>
+						</td>
+					</tr>
+				   
+					<tr>
+						<td class="pt-3-half" contenteditable="false">12345</td>
+						<td class="pt-3-half" contenteditable="true">8989M</td>
+						<td class="pt-3-half" contenteditable="true">a Fone of note</td>
+						<td class="pt-3-half" contenteditable="true">2</td>
+						<td class="pt-3-half" contenteditable="true">R 24220.00</td>
+						<td class="pt-3-half" contenteditable="true">Boyz Store</td>
+						<td class="pt-3-half" contenteditable="true">In Progress</td>
+						<td class="pt-3-half" contenteditable="true">22/07/2018</td>
+						<td>
+							<div class="btn-group">
+								<p data-placement="top" data-toggle="tooltip" title="Edit">
+									<button class="btn-xs" data-title="Edit" data-toggle="modal" data-target="#mymodal" >
+										<i class="fas fa-pencil-alt"></i>
+									</button>
+								</p>
+								<p data-placement="top" data-toggle="tooltip" title="Close">
+									<button class="btn-danger btn-xs" data-title="Close" data-toggle="modal" data-target="#close" >
+										<i class="fa fa-archive"></i>
+									</button>
+								</p>
+							</div>
+						</td>
+					</tr>
+					
+					<tr class="hide">
+						<td class="pt-3-half" contenteditable="false">12345</td>
+						<td class="pt-3-half" contenteditable="true">8989M</td>
+						<td class="pt-3-half" contenteditable="true">a Fone of note</td>
+						<td class="pt-3-half" contenteditable="true">2</td>
+						<td class="pt-3-half" contenteditable="true">R 24220.00</td>
+						<td class="pt-3-half" contenteditable="true">Boyz Store</td>
+						<td class="pt-3-half" contenteditable="true">Completed</td>
+						<td class="pt-3-half" contenteditable="true">22/07/2018</td>
+						<td>
+							<div class="btn-group">
+								<p data-placement="top" data-toggle="tooltip" title="Edit">
+									<button class="btn-xs" data-title="Edit" data-toggle="modal" data-target="#mymodal" >
+										<i class="fas fa-pencil-alt"></i>
+									</button>
+								</p>
+								<p data-placement="top" data-toggle="tooltip" title="Close">
+									<button class="btn-danger btn-xs" data-title="Close" data-toggle="modal" data-target="#close" >
+										<i class="fa fa-archive"></i>
+									</button>
+								</p>
+							</div>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">Edit Query Description</h4>
+					</div>
+					<form method="post" action="">
+						<div class="modal-body">
+							<div class="form-group">
+								<input class="form-control" type="hidden" name="content">
+								<label for="heading">Enter Description of Query</label>
+								<textarea class="form-control" id="qdesc"  rows="4" name="content"></textarea>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							<button type="submit" class="btn btn-primary">Save changes</button>
+						</div>
+					</form>
+				</div>	
+			</div>
+		</div>
+	</main>
+
+    <!-- MAIN Content-->
+
+    <footer class="container-fluid bg-primary text-white fixed-bottom py-3" id="footer">
+        <div class="row">
+            <div class="col-lg-12" style="text-align: center">
+                <h6>
+                    © 2018 Mobile Telephone Networks. All rights reserved.
+                    <a>Privacy Policy</a>
+                </h6>
+            </div>
+        </div>
+    </footer>  
+
+    <script src="../js/jquery.js"></script>
+    <script src="../js/popper.js"></script>
+    <script src="../js/bootstrap.js"></script>
+    <script src="../js/gijgo.min.js"></script>
+    <script src="../js/scripts.js"></script>
+	
+	<script>
+				
+		var prevType = '.qt';
+		
+		$(".lynt a").click(function(){
+			$("#searchChannel").val($(this).text());
+			
+		});
+		$(".lyntWHS a").click(function(){
+			$("#searchWHS").val($(this).text());
+		});
+		
+		$(".lyntCourier a").click(function(){
+			$("#searchCourier").val($(this).text());
+		});
+		$(".lyntChanSupp a").click(function(){
+			$("#searchChanSupp").val($(this).text());
+		});
+		$(".lyntAssignee a").click(function(){
+			$("#searchAssignee").val($(this).text());
+		});
+	   		
+		$('#searchInput').keypress(function(event){
+			var keycode = (event.keyCode ? event.keyCode : event.which);
+			if(keycode == '13'){
+				//alert($(this).text());
+				matchInput($("#searchInput").val());
+				
+			}
+		});
+		$('#searchQueryFilter').keypress(function(event){
+			var keycode = (event.keyCode ? event.keyCode : event.which);
+			if(keycode == '13'){
+				
+				if($("#btn-channel").text()==='Query Status'){
+					$(`${prevType}`).addClass("d-none");
+					$(".qs").removeClass("d-none");
+				}
+				if($("#searchQueryFilter").val()==='Date Range'){
+					$(".dfrom").removeClass("d-none");
+					$(".dto").removeClass("d-none");
+				}
+				if($("#searchQueryFilter").val()!='Date Range'){
+					if(!$("dfParent").hasClass("d-none")){
+						$(".dfrom").addClass("d-none");
+						$(".dto").addClass("d-none");
+					}
+				}
+				if($("#searchQueryFilter").val()==='Date Range'){
+					$(".qt").addClass("d-none");
+					$(".df").removeClass("d-none");
+					$(".dt").removeClass("d-none");
+				}
+				if($("#searchQueryFilter").val()==='Assignee'){
+					$(".qa").addClass("d-none");
+					$(".df").removeClass("d-none");
+					$(".dt").removeClass("d-none");
+				}
+				if($("#searchQueryFilter").val()==='CreatedBy'){
+					$(".qa").addClass("d-none");
+					$(".df").removeClass("d-none");
+					$(".dt").removeClass("d-none");
+				}
+				if($("#searchQueryFilter").val()==='Last Fifty'){
+					$(".df").removeClass("d-none");
+					$(".dt").removeClass("d-none");
+				}
+			}	
+		});
+		$('#searchQueryStatus').keypress(function(event){
+			var keycode = (event.keyCode ? event.keyCode : event.which);
+			if(keycode == '13'){
+				//alert("btn value  " + $(".bt-stat").text());
+				if($(".bt-stat").text()==='Query Status'){
+					$("#queryTable").removeClass("d-none");
+				}
+			}
+		});
+		
+		function matchInput(searchText, btnValue){
+			
+			var btnArr = ["btn-assign", "btn-Priority", "btn-status","btn-channel"];
+			if (searchText==='Order Status'){
+				$(".qf").removeClass("d-none");
+				$(`${prevType}`).addClass("d-none");
+				prevType = ".qf";
+				return;					
+			}
+			if (searchText==='Query Status'){
+				$(`${prevType}`).addClass("d-none");
+				$(".qs").removeClass("d-none");
+				prevType = ".qs";
+									
+			}
+			if (searchText==='Assignee'){
+				$(`${prevType}`).addClass("d-none");
+				$(".qa").removeClass("d-none");
+				prevType = ".qa";
+				return;
+			}
+			if (searchText==='Priority'){
+				$(".qp").removeClass("d-none");
+				$(`${prevType}`).addClass("d-none");
+				prevType = ".qp";
+				
+				return;					
+			}
+			/*
+			if (searchText==='btnType'){
+				$(".qf").removeClass("d-none");
+				$(`${prevType}`).addClass("d-none");
+				prevType = ".qf";
+				return;
+			}
+				if($("#searchQueryFilter").val()==='Query Status'){
+					$(`${prevType}`).addClass("d-none");
+					$(".qs").removeClass("d-none");
+				}*/
+				if($("#searchQueryFilter").val()==='Date Range'){
+					$(".dfrom").removeClass("d-none");
+					$(".dto").removeClass("d-none");
+				}
+				if($("#searchQueryFilter").val()!='Date Range'){
+					if(!$("dfParent").hasClass("d-none")){
+						$(".dfrom").addClass("d-none");
+						$(".dto").addClass("d-none");
+					}
+				}
+				if($("#searchQueryFilter").val()==='Date Range'){
+					$(".qt").addClass("d-none");
+					$(".df").removeClass("d-none");
+					$(".dt").removeClass("d-none");
+				}
+				if($("#searchQueryFilter").val()==='Assignee'){
+					$(".qa").addClass("d-none");
+					$(".df").removeClass("d-none");
+					$(".dt").removeClass("d-none");
+				}
+				if($("#searchQueryFilter").val()==='CreatedBy'){
+					$(".qa").addClass("d-none");
+					$(".df").removeClass("d-none");
+					$(".dt").removeClass("d-none");
+				}
+				if($("#searchQueryFilter").val()==='Last Fifty'){
+					$(".df").removeClass("d-none");
+					$(".dt").removeClass("d-none");
+				}
+				if(btnArr.includes(btnValue)) {
+					$("#queryTable").removeClass("d-none");
+				}
+								
+		}
+	var find = ()=> {
+	
+	  var input, filter, table, tr, td, i;
+	  input = document.getElementById("searchIn");
+	  filter = input.value.toUpperCase();
+	  table = document.getElementById("queryTable");
+	  tr = table.getElementsByTagName("tr");
+	  cols = table.getElementsByTagName("td");
+	  var found = 0;
+	  
+	  //look for filter string in all cols
+	  for (y = 0; y < cols.length; y++) {
+		found = 0;
+	  // Loop through all table rows, and hide those who don't match the search query
+		  for (i = 0; i < tr.length; i++) {
+			td = tr[i].getElementsByTagName("td")[y];
+			if (td) {
+			  if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+				tr[i].style.display = "";
+				found = 1;
+			  } else {
+				tr[i].style.display = "none";
+			  }
+			}
+		  }
+		  if (found){
+			return;
+		  }
+		}  
+	};
+		$(document).ready(function(){
+		    var modal = document.getElementById('myModal');
+
+			// Get the button that opens the modal
+			var btn = document.getElementById("btn-edit");
+            //var btn = $('#btn-edit');
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close")[0];
+
+			// When the user clicks on the button, open the modal
+			btn.onclick = function() {
+				modal.style.display = "block";
+			}
+
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function() {
+				modal.style.display = "none";
+			}
+
+			// When the user clicks anywhere outside of the modal, close it
+			window.onclick = function(event) {
+				if (event.target == modal) {
+					modal.style.display = "none";
+				}
+			} 
+		}); 
+		function toggleShow(id) {
+			document.getElementById(id).classList.toggle("show");
+		}
+
+		function filterFunction(searchId, ddId) {
+			var input, filter, ul, li, a, i;
+			input = document.getElementById(searchId);
+			filter = input.value.toUpperCase();
+			div = document.getElementById(ddId);
+			a = div.getElementsByTagName("a");
+			
+			for (i = 0; i < a.length; i++) {
+				if (a[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
+					a[i].style.display = "";
+				} else {
+					a[i].style.display = "none";
+				}
+			}
+		}
+	</script>
+</body>
+
+</html>

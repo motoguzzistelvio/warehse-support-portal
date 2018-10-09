@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Warehouse Self-Service Portal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" href="../css/fonts/fonts.css">
+    <link rel="stylesheet" href="../css/bootstrap.css" media="screen">
+    <link rel="stylesheet" href="../css/gijgo.min.css">
+    <link rel="stylesheet" href="../css/fontawesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+	<style>
+	.purple-border textarea {
+		border: 1px solid #ba68c8;
+	}
+	.purple-border .form-control:focus {
+		border: 1px solid #ba68c8;
+		box-shadow: 0 0 0 0.2rem rgba(186, 104, 200, .25);
+	}
+	.green-border-focus .form-control:focus {
+		border: 1px solid #8bc34a;
+		box-shadow: 0 0 0 0.2rem rgba(139, 195, 74, .25);
+	}
+	</style>
+</head>
+
+<body>
+    <div class="container-fluid bg-dark">
+		<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+			<div class="mx-auto order-0 order-md-0 w-50">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item">
+						<a class="nav-link" href="#">
+							<i class="fas fa-sign-in-alt"> Login</i>
+						</a>
+					</li>
+				</ul>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+			</div>
+			<div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuTic" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<i class="fas fa-ticket-alt"></i> Tickets
+						</a>
+						<div class="dropdown-menu" aria-labelledby="#navbarDropdownMenuTic">
+							<a class="dropdown-item" href="#">Create Remedy Ticket</a>
+							<a class="dropdown-item" href="#">View Remedy Tickets</a>
+							<a class="dropdown-item" href="#">Manage Remedy Tickets</a>
+							<a class="dropdown-item" href="#">View Siebel Tickets</a>
+						</div>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuQLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<i class="fas fa-list-alt"></i> Queries
+						</a>
+						<div class="dropdown-menu" aria-labelledby="#navbarDropdownMenuQLink">
+							<a class="dropdown-item" href="CreateQuery.html">Log Query</a>
+							<a class="dropdown-item" href="#">Update Status</a>
+							<a class="dropdown-item" href="#">Close Query</a>
+							<a class="dropdown-item" href="#">Re-open Query</a>
+							<a class="dropdown-item" href="#">View Queries</a>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div class="navbar-collapse collapse w-100 order-2 order-md-0 dual-collapse2">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuTLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<i class="fas fa-mobile"></i> Device Status
+						</a>
+						<div class="dropdown-menu" aria-labelledby="#navbarDropdownMenuTLink">
+							<a class="dropdown-item" href="#">Orders</a>
+							<a class="dropdown-item" href="#">Returns</a>
+							<a class="dropdown-item" href="#">Collections</a>
+							<a class="dropdown-item" href="#">RMA Status</a>
+						</div>
+					</li>
+				</ul>
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuDLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<i class="far fa-file"></i> Docs
+						</a>
+						<div class="dropdown-menu" aria-labelledby="#navbarDropdownMenuDLink">
+							<a class="dropdown-item" href="#">POD</a>
+							<a class="dropdown-item" href="#">Tax Invoices</a>
+						</div>
+					</li>
+				</ul>
+				<ul class="navbar-nav ms-auto">
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuDLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<i class="far fa-file"></i> Reports
+						</a>
+						<div class="dropdown-menu" aria-labelledby="#navbarDropdownMenuDLink">
+							<a class="dropdown-item" href="#">Queries logged</a>
+							<a class="dropdown-item" href="#">Paused Orders</a>
+							<a class="dropdown-item" href="#">Order Status</a>
+							<a class="dropdown-item" href="#">Collections/Returns</a>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div class="navbar-collapse collapse w-100 order-3 order-md-0 dual-collapse2">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuAdmin" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<i class="fab fa-android"></i> Actions
+						</a>
+						<div class="dropdown-menu" aria-labelledby="#navbarDropdownMenuAdmin">
+							<a class="dropdown-item" href="#">User</a>
+							<a class="dropdown-item" href="#">Assign Query</a>
+							<a class="dropdown-item" href="#">Escalations</a>
+							<a class="dropdown-item" href="#">Pause Order</a>
+							<a class="dropdown-item" href="#">Capture alt Contact Details</a>
+							<a class="dropdown-item" href="#">Ack alt Contact Details</a>
+						</div>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#" id="navbarMenuLogout">
+							<i class="fas fa-sign-out-alt"></i> Logout
+						</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+	</div>
+    <div class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <a href="/" class="navbar-brand">
+                        <img src="../img/logo.jpg"> MTN </a>
+                    <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                                        <span class="navbar-toggler-icon"></span>
+                                    </button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN Content wher form will be -->
+
+    <main class="container-fluid col-md-12" style="text-align:center">
+		<h3>Create Query</h3>
+		<br/>
+        <div class="mx-5 col-md-11 row justify-content-center">
+			<div class="dropdown dd">
+			  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+				Dropdown
+				<span class="caret"></span>
+			  </button>
+			  <ul class="dropdown-menu demm" aria-labelledby="dropdownMenu1">
+				<li><a href="#" data-value="order status">Order Status</a></li>
+				<li><a href="#" data-value="priority">Priority</a></li>
+				<li><a href="#" data-value="returns">Returns</a></li>
+				<li><a href="#" data-value="collections">Collections</a></li>
+			  </ul>
+			</div>
+    	</div>
+		<br/>
+		<br/>
+		<div class="mx-5 col-md-11 row justify-content-center">
+			<div class="form-group purple-border col-md-10 d-none" id="orderStat">
+				<label for="TextareaOrderstat">Create Order Status Query</label>
+				<textarea class="form-control" id="TextareaOrderstat" rows="4"></textarea>
+			</div>
+		</div>
+    </main>
+
+    <!-- MAIN Content-->
+
+    <footer class="container-fluid bg-primary text-white fixed-bottom py-3" id="footer">
+        <div class="row">
+            <div class="col-lg-12" style="text-align: center">
+                <h6>
+                    © 2018 Mobile Telephone Networks. All rights reserved.
+                    <a>Privacy Policy</a>
+                </h6>
+            </div>
+        </div>
+    </footer>  
+
+    <script src="../js/jquery.js"></script>
+    <script src="../js/popper.js"></script>
+    <script src="../js/bootstrap.js"></script>
+    <script src="../js/gijgo.min.js"></script>
+    <script src="../js/scripts.js"></script>
+	
+	<script>
+		
+		$(".demm li a").click(function(){
+		    alert($(this).text());
+			$(this).parents(".dd").find('.btn').html($(this).text() + ' <span class="caret"></span>');
+			$(this).parents(".dd").find('.btn').val($(this).data('value'));
+		});
+
+});
+	</script>
+</body>
+
+</html>

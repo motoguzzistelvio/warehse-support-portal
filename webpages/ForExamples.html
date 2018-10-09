@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>MTN EDC Portal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" href="./css/fonts/fonts.css">
+    <link rel="stylesheet" href="./css/bootstrap.css" media="screen">
+    <link rel="stylesheet" href="./css/gijgo.min.css">
+    <link rel="stylesheet" href="./css/fontawesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="./css/styles.css">
+</head>
+
+<body>
+
+    <div class="container-fluid bg-dark">
+        <ul class="nav justify-content-end">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-user"></i> Account
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="#">Link 1</a>
+                    <a class="dropdown-item" href="#">Link 2</a>
+                    <a class="dropdown-item" href="#">Link 3</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+            </li>
+        </ul>
+    </div>
+
+
+    <div class="navbar navbar-expand-lg navbar-dark bg-primary">
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <a href="/" class="navbar-brand">
+                        <img src="./img/logo.jpg"> MTN </a>
+                    <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                                        <span class="navbar-toggler-icon"></span>
+                                    </button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN Content wher form will be -->
+
+    <main class="container-fluid pt-5">
+        <div class="mx-3">
+            <form>
+
+            </form>
+            <div class="form-row">
+                <div class="col-md-4 mb-3">
+                    <label for="txtAccountNumber" id="lblAccountNumber">Account Number</label>
+                    <input type="text" class="form-control" id="txtAccountNumber" placeholder="Account Number" required>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="dtFromDate" id="lblFromDate">From Date</label>
+                    <input class="form-control datepicker" id="dtFromDate" placeholder="From Date">
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="dtToDate" id="lblToDate">To Date</label>
+                    <input class="form-control datepicker" id="dtToDate" placeholder="To Date">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-4 col-md-2 col-lg-1 mb-3">
+                    <button type="button" class="btn btn-secondary btn-lg">Button 1</button>
+                </div>
+                <div class="col-4 col-md-2 col-lg-1 mb-3">
+                    <button type="button" class="btn btn-secondary btn-lg">Button 2</button>
+                </div>
+                <div class="col-4 col-md-2 col-lg-1 mb-3">
+                    <button type="button" class="btn btn-secondary btn-lg">Button 3</button>
+                </div>
+            </div>
+
+            <hr>
+            <br>
+           
+		   
+		   <h1>Section A:Business Unit Details</h1><br>
+		   <div class="form-row">
+		   
+		   <div class="col-md-4 mb-3">
+                    <label for="txtBU" id="lblBU">Business unit:</label>
+                    <input type="text" class="form-control" id="txtAccountNumber" placeholder="" required>
+           </div><br><br>
+			
+			 <div class="col-md-4 mb-3">
+                    <label for="txtRN" id="lblAccountNumber">Requester Name:</label>
+                    <input type="text" class="form-control" id="txtRN" placeholder="" required>
+           </div><br>
+		   
+		   <div class="col-md-4 mb-3">
+                    <label for="txtEmail" id="lblBU">Email address:</label>
+                    <input type="text" class="form-control" id="txtEmail" placeholder="" required>
+           </div><br>
+			
+			 <div class="col-md-4 mb-3">
+                    <label for="txtNo" id="lblAccountNumber">Contact Number:</label>
+                    <input type="text" class="form-control" id="txtContactNo" placeholder="" required>
+           </div><br>
+		   
+		   <div class="col-md-4 mb-3">
+                    <label for="txtInitRequest" id="lblAccountNumber">Date of Initial Request:</label>
+                    <input type="text" class="form-control" id="txtInitRequest" placeholder="" required>
+           </div><br>
+		   </div>
+
+
+
+
+<h1>Section B:Product Service Requested</h1>
+ <div class="form-row">
+ 
+ <div class="col-md-4 mb-3">
+                    <label for="txtDetailProdOrServ" id="lblBU">Product or service required:</label>
+                    <textarea type="textarea" class="form-control" id="txtDetailProdOrServ" placeholder="Detail the product or service required" required></textarea>
+           </div><br>
+			
+			 <div class="col-md-4 mb-3">
+                    <label for="txtSrcSpecialist" id="lblAccountNumber">Assigned to:</label>
+                    <input type="text" class="form-control" id="txtSrcSpecialist" placeholder="List sourcing specialist" required>
+           </div><br>
+		   
+		   <div class="col-md-4 mb-3">
+                    <label for="txtEmail" id="lblBU">Email address:</label>
+                    <input type="text" class="form-control" id="txtEmail" placeholder="" required>
+           </div><br>
+			
+			 <div class="col-md-4 mb-3">
+                    <label for="txtNo" id="lblAccountNumber">New or existing contract renewal:</label>
+                     <select type="text" class="ContactUsInput" name="fname">
+						<option>New</option>
+						<option>Existing</option>
+					 </select><br>
+             </div><br>
+		   
+		   <div class="col-md-4 mb-3">
+                    <label for="txtNo" id="lblAccountNumber">CAPEX/OPEX:</label>
+                     <select type="text" class="ContactUsInput" name="fname">
+						<option>CAPEX</option>
+						<option>OPEX</option>
+					 </select><br>
+             </div><br>
+ 
+			 <div class="col-md-4 mb-3">
+                    <label for="txtNo" id="lblAccountNumber">APPROVED budget value:</label>
+                    <input type="text" class="form-control" id="txtEmail" placeholder="" required>
+             </div><br>
+			 <!--js needed here-->
+ 
+			 <div class="col-md-4 mb-3">
+                    <label for="txtNo" id="lblAccountNumber">Has budget been approved at CAPEX Steerco?</label>
+                     <select type="text" class="ContactUsInput" name="fname">
+						<option>Yes</option>
+						<option>No</option>
+						<option>N/A</option>
+					 </select><br>
+             </div><br>
+
+			<div class="col-md-4 mb-3">
+                    <label for="txtNo" id="lblAccountNumber">Has business case been approved?</label>
+                     <select type="text" class="ContactUsInput" name="fname">
+						<option>Yes</option>
+						<option>No</option>
+						<option>N/A</option>
+					</select><br>
+             </div><br>
+
+			<div class="col-md-4 mb-3">
+                    <label for="txtNo" id="lblAccountNumber">In case of consultancy service, has MTN SA CEO approved?</label>
+                     <select type="text" class="ContactUsInput" name="fname">
+						<option>Yes</option>
+						<option>No</option>
+						<option>N/A</option>
+					</select><br>
+             </div><br>
+			</div>
+ 
+ 
+ <h1>Section C: Contract commencement date</h1>
+ <div class="form-row">
+ 
+ <div class="col-md-4 mb-3">
+                    <label for="txtDetailProdOrServ" id="lblBU">Product or service required:</label>
+                    <textarea type="textarea" class="form-control" id="txtDetailProdOrServ" placeholder="Detail the product or service required" required></textarea>
+           </div><br>
+			
+			 <div class="col-md-4 mb-3">
+                    <label for="txtSrcSpecialist" id="lblAccountNumber">Assigned to:</label>
+                    <input type="text" class="form-control" id="txtSrcSpecialist" placeholder="List sourcing specialist" required>
+           </div><br>
+		   
+		   <div class="col-md-4 mb-3">
+                    <label for="txtEmail" id="lblBU">Email address:</label>
+                    <input type="text" class="form-control" id="txtEmail" placeholder="" required>
+           </div><br>
+			
+			 <div class="col-md-4 mb-3">
+                    <label for="txtNo" id="lblAccountNumber">New or existing contract renewal:</label>
+                     <select type="text" class="ContactUsInput" name="fname">
+						<option>New</option>
+						<option>Existing</option>
+					 </select><br>
+             </div><br>
+		   
+		   <div class="col-md-4 mb-3">
+                    <label for="txtNo" id="lblAccountNumber">CAPEX/OPEX:</label>
+                     <select type="text" class="ContactUsInput" name="fname">
+						<option>CAPEX</option>
+						<option>OPEX</option>
+					 </select><br>
+             </div><br>
+ 
+			 <div class="col-md-4 mb-3">
+                    <label for="txtNo" id="lblAccountNumber">APPROVED budget value:</label>
+                    <input type="text" class="form-control" id="txtEmail" placeholder="" required>
+             </div><br>
+			 <!--js needed here-->
+ 
+			 <div class="col-md-4 mb-3">
+                    <label for="txtNo" id="lblAccountNumber">Has budget been approved at CAPEX Steerco?</label>
+                     <select type="text" class="ContactUsInput" name="fname">
+						<option>Yes</option>
+						<option>No</option>
+						<option>N/A</option>
+					 </select><br>
+             </div><br>
+
+			<div class="col-md-4 mb-3">
+                    <label for="txtNo" id="lblAccountNumber">Has business case been approved?</label>
+                     <select type="text" class="ContactUsInput" name="fname">
+						<option>Yes</option>
+						<option>No</option>
+						<option>N/A</option>
+					</select><br>
+             </div><br>
+
+			<div class="col-md-4 mb-3">
+                    <label for="txtNo" id="lblAccountNumber">In case of consultancy service, has MTN SA CEO approved?</label>
+                     <select type="text" class="ContactUsInput" name="fname">
+						<option>Yes</option>
+						<option>No</option>
+						<option>N/A</option>
+					</select><br>
+             </div><br>
+			</div>
+
+<div id="gallery-pages"></div>
+<h1>Section C:Contract commencement date</h1>
+<textarea type="text" class="ContactUsInput" placeholder="Detail the product or service required"><br>
+Assigned to: <input type="text" class="ContactUsInput" placeholder="List sourcing specialist"><br>
+New or existing contract renewal: <select type="text" class="ContactUsInput" name="fname">
+<option>New</option>
+<option>Existing</option>
+</select><br>
+CAPEX/OPEX: <select type="text" class="ContactUsInput" name="fname">
+<option>CAPEX</option>
+<option>OPEX</option>
+</select><br>
+APPROVED budget value: <input type="text" class="ContactUsInput" name="fname"><br>
+//Javascript to be added
+Has budget been approved at CAPEX Steerco?<select type="text" class="ContactUsInput" name="fname">
+<option>Yes</option>
+<option>No</option>
+</select><br>
+Has business case been approved? <select type="text" class="ContactUsInput" name="fname">
+<option>Yes</option>
+<option>No</option>
+<option>N/A</option>
+</select><br>
+In case of consultancy service, has MTN SA CEO approved? <select type="text" class="ContactUsInput" name="fname">
+<option>Yes</option>
+<option>No</option>
+<option>N/A</option>
+</select><br>
+</div>
+
+    </main>
+
+    <!-- MAIN Content -->
+
+    <footer class="container-fluid bg-primary text-white fixed-bottom py-3" id="footer">
+        <div class="row">
+            <div class="col-lg-12" style="text-align: center">
+                <h6>
+                    © 2018 Mobile Telephone Networks. All rights reserved.
+                    <a>Privacy Policy</a>
+                </h6>
+            </div>
+        </div>
+    </footer>
+
+    <script src="./js/jquery.js"></script>
+    <script src="./js/popper.js"></script>
+    <script src="./js/bootstrap.js"></script>
+    <script src="./js/gijgo.min.js"></script>
+    <script src="./js/scripts.js"></script>
+</body>
+
+</html>
